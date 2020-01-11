@@ -2,20 +2,19 @@
 
 #include <boost/lexical_cast.hpp>
 
-/*!re2c
-    re2c:define:YYCTYPE = 'Symbol';
-    re2c:define:YYCURSOR = 'cursor';
-    re2c:flags:case-insensitive = 1;
-    re2c:yyfill:enable = 0;
-*/
-
 namespace PL0 {
 
 Token::ID Lexer::operator()()
 {
 loop:
+    column += cursor - lexeme;
     lexeme = cursor;
     /*!re2c
+        re2c:define:YYCTYPE = 'Symbol';
+        re2c:define:YYCURSOR = 'cursor';
+        re2c:flags:case-insensitive = 1;
+        re2c:yyfill:enable = 0;
+
         // Special symbols
         *
         {
@@ -26,8 +25,8 @@ loop:
         "\x00" { return Token::ID::EndOfFile; }
 
         // Whitespace
-        "\r\n" | "\n" { ++line; goto loop; }
-        [ \r\f\t\v]+  { goto loop; }
+        "\n"         { ++line; column = 0; goto loop; }
+        [ \r\f\t\v]+ { goto loop; }
 
         // Keywords
         "const"     { return Token::ID::Const; }

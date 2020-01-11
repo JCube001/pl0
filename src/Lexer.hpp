@@ -15,8 +15,9 @@ public:
     explicit Lexer(const std::string& input, std::ostream& diagnostic)
         : diagnostic{diagnostic}
         , cursor{input.c_str()}
-        , lexeme{}
+        , lexeme{cursor}
         , line{1}
+        , column{1}
         , value{}
     {}
 
@@ -24,6 +25,9 @@ public:
 
     std::size_t getLine() const
     { return line; }
+
+    std::size_t getColumn() const
+    { return column; }
 
     Token::Value&& getValue()
     { return std::move(value); }
@@ -38,6 +42,7 @@ private:
     const Symbol* cursor;
     const Symbol* lexeme;
     std::size_t line;
+    std::size_t column;
     Token::Value value;
 };
 
