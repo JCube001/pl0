@@ -12,7 +12,7 @@ namespace PL0 {
 class Lexer
 {
 public:
-    explicit Lexer(const std::string& input, std::ostream& diagnostic)
+    Lexer(const std::string& input, std::ostream& diagnostic)
         : diagnostic{diagnostic}
         , cursor{input.c_str()}
         , lexeme{cursor}
@@ -33,10 +33,8 @@ public:
     { return std::move(value); }
 
 private:
+    using ID = Token::ID;
     using Symbol = std::string::value_type;
-
-    std::size_t getSize() const
-    { return cursor - lexeme; }
 
     std::ostream& diagnostic;
     const Symbol* cursor;

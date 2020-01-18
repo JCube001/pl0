@@ -19,60 +19,60 @@ loop:
         *
         {
             diagnostic << line << ": error: unrecognized symbol '" << yych << "'\n";
-            return Token::ID::Unknown;
+            return ID::Unknown;
         }
 
-        "\x00" { return Token::ID::EndOfFile; }
+        "\x00" { return ID::EndOfFile; }
 
         // Whitespace
         "\n"         { ++line; column = 0; goto loop; }
         [ \r\f\t\v]+ { goto loop; }
 
         // Keywords
-        "const"     { return Token::ID::Const; }
-        "var"       { return Token::ID::Var; }
-        "procedure" { return Token::ID::Procedure; }
-        "call"      { return Token::ID::Call; }
-        "begin"     { return Token::ID::Begin; }
-        "end"       { return Token::ID::End; }
-        "if"        { return Token::ID::If; }
-        "then"      { return Token::ID::Then; }
-        "while"     { return Token::ID::While; }
-        "do"        { return Token::ID::Do; }
-        "odd"       { return Token::ID::Odd; }
+        "const"     { return ID::Const; }
+        "var"       { return ID::Var; }
+        "procedure" { return ID::Procedure; }
+        "call"      { return ID::Call; }
+        "begin"     { return ID::Begin; }
+        "end"       { return ID::End; }
+        "if"        { return ID::If; }
+        "then"      { return ID::Then; }
+        "while"     { return ID::While; }
+        "do"        { return ID::Do; }
+        "odd"       { return ID::Odd; }
 
         // Operators and punctuation
-        "."  { return Token::ID::Period; }
-        ","  { return Token::ID::Comma; }
-        ";"  { return Token::ID::Semicolon; }
-        ":=" { return Token::ID::Assign; }
-        "?"  { return Token::ID::Read; }
-        "!"  { return Token::ID::Write; }
-        "="  { return Token::ID::Equal; }
-        "#"  { return Token::ID::NotEqual; }
-        "<"  { return Token::ID::LessThan; }
-        "<=" { return Token::ID::LessEqual; }
-        ">"  { return Token::ID::GreaterThan; }
-        ">=" { return Token::ID::GreaterEqual; }
-        "+"  { return Token::ID::Plus; }
-        "-"  { return Token::ID::Minus; }
-        "*"  { return Token::ID::Multiply; }
-        "/"  { return Token::ID::Divide; }
-        "("  { return Token::ID::LParen; }
-        ")"  { return Token::ID::RParen; }
+        "."  { return ID::Period; }
+        ","  { return ID::Comma; }
+        ";"  { return ID::Semicolon; }
+        ":=" { return ID::Assign; }
+        "?"  { return ID::Read; }
+        "!"  { return ID::Write; }
+        "="  { return ID::Equal; }
+        "#"  { return ID::NotEqual; }
+        "<"  { return ID::LessThan; }
+        "<=" { return ID::LessEqual; }
+        ">"  { return ID::GreaterThan; }
+        ">=" { return ID::GreaterEqual; }
+        "+"  { return ID::Plus; }
+        "-"  { return ID::Minus; }
+        "*"  { return ID::Multiply; }
+        "/"  { return ID::Divide; }
+        "("  { return ID::LParen; }
+        ")"  { return ID::RParen; }
 
         // Number
         [0-9]+
         {
-            value = boost::lexical_cast<int>(lexeme, getSize());
-            return Token::ID::Number;
+            value = boost::lexical_cast<int>(lexeme, cursor - lexeme);
+            return ID::Number;
         }
 
         // Identifier
         [A-Za-z_][A-Za-z0-9_]*
         {
-            value = std::string(lexeme, getSize());
-            return Token::ID::Identifier;
+            value = std::string(lexeme, cursor);
+            return ID::Identifier;
         }
     */
 }

@@ -22,6 +22,8 @@ public:
     std::unique_ptr<Ast::Program> operator()();
 
 private:
+    using ID = Token::ID;
+
     std::unique_ptr<Ast::Program> parseProgram();
     std::unique_ptr<Ast::Block> parseBlock();
     std::unique_ptr<Ast::Statement> parseStatement();
@@ -36,10 +38,10 @@ private:
     void error(std::string_view message);
     void skip();
 
-    bool match(const Token::ID expected) const
-    { return expected == id; }
+    bool match(const ID expected) const
+    { return id == expected; }
 
-    bool consume(const Token::ID expected)
+    bool consume(const ID expected)
     {
         if (match(expected)) {
             next();
@@ -54,7 +56,7 @@ private:
 
     std::ostream& diagnostic;
     Lexer lex;
-    Token::ID id;
+    ID id;
     bool failed;
 };
 

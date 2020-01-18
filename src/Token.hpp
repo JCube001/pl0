@@ -1,14 +1,13 @@
 #ifndef PL0_TOKEN_HPP
 #define PL0_TOKEN_HPP
 
-#include <boost/variant.hpp>
 #include <string>
-#include <cstdint>
+#include <variant>
 
 namespace PL0 {
 namespace Token {
 
-enum class ID : std::uint_fast8_t
+enum class ID
 {
     // Weak symbols
 
@@ -62,7 +61,7 @@ enum class ID : std::uint_fast8_t
     EndOfFile,
 };
 
-using Value = boost::variant<int, std::string>;
+using Value = std::variant<int, std::string>;
 
 } // namespace Token
 } // namespace PL0
