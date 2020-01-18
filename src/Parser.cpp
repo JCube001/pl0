@@ -7,13 +7,9 @@
 
 namespace PL0 {
 
-std::unique_ptr<Ast::Block> Parser::operator()()
+std::unique_ptr<Ast::Program> Parser::operator()()
 {
-    auto block = parseBlock();
-
-    if (!consume(Token::ID::Period)) {
-        error("missing '.' at end of program");
-    }
+    auto program = parseProgram();
 
     if (!match(Token::ID::EndOfFile)) {
         error("junk after end of program");
@@ -23,7 +19,20 @@ std::unique_ptr<Ast::Block> Parser::operator()()
         return nullptr;
     }
 
-    return block;
+    return program;
+}
+
+std::unique_ptr<Ast::Program> Parser::parseProgram()
+{
+    auto program = std::make_unique<Ast::Program>();
+
+    program->block = parseBlock();
+
+    if (!consume(Token::ID::Period)) {
+        error("missing '.' at end of program");
+    }
+
+    return program;
 }
 
 std::unique_ptr<Ast::Block> Parser::parseBlock()

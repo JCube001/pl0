@@ -4,6 +4,7 @@
 namespace PL0 {
 namespace Ast {
 
+struct Program;
 struct Block;
 struct Constant;
 struct Procedure;
@@ -33,6 +34,7 @@ class Visitor
 {
 public:
     virtual ~Visitor() = default;
+    virtual void visit(Program& program) = 0;
     virtual void visit(Block& block) = 0;
     virtual void visit(Constant& constant) = 0;
     virtual void visit(Procedure& procedure) = 0;

@@ -23,6 +23,7 @@ public:
         , scopes{Scope{}}
     {}
 
+    void visit(Ast::Program& program) override;
     void visit(Ast::Block& block) override;
     void visit(Ast::Constant& constant) override;
     void visit(Ast::Procedure& procedure) override;

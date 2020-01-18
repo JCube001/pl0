@@ -19,9 +19,10 @@ public:
         , failed{false}
     {}
 
-    std::unique_ptr<Ast::Block> operator()();
+    std::unique_ptr<Ast::Program> operator()();
 
 private:
+    std::unique_ptr<Ast::Program> parseProgram();
     std::unique_ptr<Ast::Block> parseBlock();
     std::unique_ptr<Ast::Statement> parseStatement();
     std::unique_ptr<Ast::Condition> parseCondition();

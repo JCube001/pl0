@@ -74,9 +74,9 @@ const std::string text{
 
 void BM_ParseValidProgram(benchmark::State& state)
 {
-    std::unique_ptr<PL0::Ast::Block> block;
+    std::unique_ptr<PL0::Ast::Program> program;
     for (auto _ : state) {
-        benchmark::DoNotOptimize(block = PL0::Parser{text, std::cerr}());
+        benchmark::DoNotOptimize(program = PL0::Parser{text, std::cerr}());
     }
 }
 BENCHMARK(BM_ParseValidProgram);

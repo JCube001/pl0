@@ -26,6 +26,7 @@
 #include "Ast/Number.hpp"
 #include "Ast/OddCondition.hpp"
 #include "Ast/Procedure.hpp"
+#include "Ast/Program.hpp"
 #include "Ast/ReadStatement.hpp"
 #include "Ast/Statement.hpp"
 #include "Ast/SubtractionExpression.hpp"

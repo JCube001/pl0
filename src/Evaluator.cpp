@@ -5,6 +5,11 @@
 
 namespace PL0 {
 
+void Evaluator::visit(Ast::Program& program)
+{
+    program.block->accept(*this);
+}
+
 void Evaluator::visit(Ast::Block& block)
 {
     for (auto& constant : block.constants) {
