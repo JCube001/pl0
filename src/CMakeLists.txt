@@ -15,7 +15,7 @@ VERBATIM
 
 find_package(Boost REQUIRED COMPONENTS filesystem)
 
-add_library(pl0 ${LEXER_CPP} Parser.cpp Evaluator.cpp)
+add_library(pl0 ${LEXER_CPP} Parser.cpp Evaluator.cpp DotGenerator.cpp)
 target_compile_features(pl0 PUBLIC cxx_std_17)
 target_include_directories(pl0 PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 target_link_libraries(pl0 PUBLIC Boost::boost)
